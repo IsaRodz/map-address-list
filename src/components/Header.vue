@@ -17,6 +17,7 @@
       @select="onSelectSuggestion"
       field="formatted_address"
       placeholder="Busca una dirección"
+      clear-on-select
     >
       <template slot="empty">
         <p v-if="loadingSuggestions">Cargando...</p>

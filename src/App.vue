@@ -10,11 +10,11 @@
         :icon="icon"
       />
     </gmap-map>
-    <vue-bottom-sheet ref="list" :overlay="false">
+    <vue-bottom-sheet ref="list" :overlay="false" max-height="50%">
       <places-list :places="places" @click-place="onClickPlace" />
     </vue-bottom-sheet>
     <vue-bottom-sheet ref="detail" :overlay="false">
-      <place-detail :selected-place="selectedPlace" />
+      <place-detail :selected-place="selectedPlace" max-height="25%" />
     </vue-bottom-sheet>
   </div>
 </template>

@@ -34,7 +34,7 @@
     padding: 0;
 
     li {
-      padding: 16px 0;
+      padding: 10px 0;
       cursor: pointer;
 
       &:not(:last-child) {

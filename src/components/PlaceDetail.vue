@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="media is-align-items-center">
+    <div class="media is-align-items-center mb-5">
       <figure class="media-right">
         <div class="image is-64x64">
           <img src="../assets/place.png" alt="" />
@@ -39,7 +39,7 @@
 <style lang="scss" scoped>
   .grid {
     display: grid;
-    margin: 26px 10px;
+    margin: 7px;
     gap: 7px;
     &.col-4 {
       grid-template-columns: repeat(4, 1fr);

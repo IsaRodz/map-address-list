@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <div class="container">
     <div class="media is-align-items-center mb-5">
-      <figure class="media-right">
+      <div v-if="!isMobile" class="back-button" @click="goBack">
+        <feather type="arrow-left-circle"></feather>
+      </div>
+      <figure class="media-right" :class="{ 'ml-0': !isMobile }">
         <div class="image is-64x64">
           <img src="../assets/place.png" alt="" />
         </div>
       </figure>
-      <div class="media-content ml-3">
+      <div class="media-content" :class="{ 'ml-3': isMobile }">
         <h1 class="is-capitalized is-size-4 is-size-5-mobile">
           {{ selectedPlace.title }}
         </h1>
@@ -19,10 +22,10 @@
       <div class="badge is-teal"></div>
       <div class="badge has-background-light"></div>
     </div>
-    <grid class="grid col-2">
+    <div class="grid col-2">
       <div class="badge has-background-light"></div>
       <div class="badge has-background-light"></div>
-    </grid>
+    </div>
   </div>
 </template>
 
@@ -32,14 +35,25 @@
       selectedPlace: {
         required: true,
       },
+      isMobile: {
+        default: false,
+      },
+    },
+    methods: {
+      goBack() {
+        this.$emit('press-back');
+      },
     },
   };
 </script>
 
 <style lang="scss" scoped>
+  .container {
+    position: relative;
+  }
   .grid {
     display: grid;
-    margin: 7px;
+    margin: 7px 0;
     gap: 7px;
     &.col-4 {
       grid-template-columns: repeat(4, 1fr);
@@ -47,6 +61,13 @@
     &.col-2 {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
   }
 
   .badge {

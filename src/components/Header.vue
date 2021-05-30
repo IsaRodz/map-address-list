@@ -29,8 +29,10 @@
 
 <script>
   import useGeocode from '../useGeocode';
+  import PlacesList from './PlacesList.vue';
 
   export default {
+    components: { PlacesList },
     data() {
       return {
         address: '',
@@ -108,6 +110,10 @@
         color: #9a9a9a;
       }
     }
+  }
+
+  #places-list {
+    display: none;
   }
 
   .row {

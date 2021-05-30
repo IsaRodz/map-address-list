@@ -39,3 +39,24 @@ a {
     color: #fafafa !important;
   }
 }
+
+@media (min-width: 768px) {
+  .app-container {
+    flex-direction: row !important;
+  }
+
+  .sidebar {
+    .media {
+      align-items: flex-start;
+      flex-direction: column !important;
+    }
+  }
+
+  .places-list {
+    margin: 1.5em 0 1em;
+  }
+
+  .row {
+    display: none;
+  }
+}

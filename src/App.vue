@@ -1,6 +1,21 @@
 <template>
   <div class="app-container">
-    <app-header @pick-suggestion="addPlace" @click-menu="onClickMenu" />
+    <sidebar>
+      <app-header
+        :places="places"
+        @pick-suggestion="addPlace"
+        @click-menu="onClickMenu"
+      />
+      <div v-if="!isMobile" class="p-3">
+        <place-detail
+          v-if="selectedPlace.place_id"
+          :selected-place="selectedPlace"
+          :is-mobile="isMobile"
+          @press-back="selectedPlace = {}"
+        />
+        <places-list v-else :places="places" @click-place="onClickPlace" />
+      </div>
+    </sidebar>
     <gmap-map :center="mapCenter" :zoom="14" style="flex: 1">
       <gmap-marker
         v-for="place of places"
@@ -14,13 +29,14 @@
       <places-list :places="places" @click-place="onClickPlace" />
     </vue-bottom-sheet>
     <vue-bottom-sheet ref="detail" :overlay="false">
-      <place-detail :selected-place="selectedPlace" max-height="25%" />
+      <place-detail :selected-place="selectedPlace" :is-mobile="isMobile" />
     </vue-bottom-sheet>
   </div>
 </template>
 
 <script>
   import VueBottomSheet from '@webzlodimir/vue-bottom-sheet';
+  import Sidebar from './components/Sidebar';
   import AppHeader from './components/Header';
   import PlaceDetail from './components/PlaceDetail.vue';
   import PlacesList from './components/PlacesList.vue';
@@ -29,6 +45,7 @@
   export default {
     name: 'App',
     components: {
+      Sidebar,
       AppHeader,
       VueBottomSheet,
       PlaceDetail,
@@ -44,6 +61,7 @@
           lat: -12.046374,
           lng: -77.042793,
         },
+        isMobile: false,
       };
     },
     methods: {
@@ -65,11 +83,21 @@
       onClickPlace(place) {
         this.mapCenter = place.geometry.location;
         this.selectedPlace = place;
-        this.$refs.detail.open();
+        if (this.isMobile) {
+          this.$refs.detail.open();
+        }
       },
       onClickMenu() {
         this.$refs.list.open();
       },
+    },
+    mounted() {
+      if (window.innerWidth < 768) {
+        this.isMobile = true;
+      }
+      window.addEventListener('resize', () => {
+        this.isMobile = window.innerWidth < 768;
+      });
     },
   };
 </script>

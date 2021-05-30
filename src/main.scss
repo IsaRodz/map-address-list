@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #7a7a7a;
+  border-radius: 10px;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto;
+}
+
+input,
+textarea,
+select,
+button,
+a {
+  font-family: inherit;
+  outline: none;
+  transition: 300ms;
+}
+
+.bottom-sheet {
+  &__content {
+    overflow-y: auto !important;
+    min-height: 100px;
+    margin-bottom: 1em;
+    padding: 0 16px;
+  }
+
+  &__card {
+    background: #212121 !important;
+    color: #fafafa !important;
+  }
+}
